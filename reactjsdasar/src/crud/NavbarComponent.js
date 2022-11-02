@@ -2,33 +2,36 @@ import React from 'react'
 import { NavDropdown, Navbar, Nav, Form, FormControl, Container, Button} from 'react-bootstrap';
 
 const NavbarComponent = () => {
-    
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
-                    <Navbar.Brand href="#home">CRUD REACT JS</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
+                <Navbar.Brand href="#home">CRUD REACT JS</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
                         <Nav.Link href="#home">Home</Nav.Link>
                         <Nav.Link href="#link">Link</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">
-                        Another action
+                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.2">
+                                Another action
                             </NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="#action/3.4">
-                        Separated link
-                        </NavDropdown.Item>
+                                Separated link
+                            </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
+                    <Form inline="true">
+                        <FormControl type="text" placeholder="Search" />
+                        <Button variant="outline-light">Search</Button>
+                    </Form>
                 </Navbar.Collapse>
             </Container>
-    </Navbar>
-        
-        )
-    }
-    export default NavbarComponent
+        </Navbar>
+    );
+};
+
+export default NavbarComponent
     

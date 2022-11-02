@@ -4,7 +4,6 @@ import NavbarComponent from './NavbarComponent'
 import Tabel from './Tabel'
 
 export default class Crud extends Component {
-
     constructor(props) {
         super(props)
     
@@ -13,15 +12,15 @@ export default class Crud extends Component {
             nama : "",
             deskripsi : "",
             harga : 0,
-            id : ""
-        }
+            id : "",
+        };
     }
     
     handleChange = (event) => {
         this.setState({
-            [event.target.nama] : event.target.value
-        })
-    }
+            [event.target.nama] : event.target.value,
+        });
+    };
     
     handleSubmit = (event) => {
         event.preventDefault();
@@ -47,50 +46,66 @@ export default class Crud extends Component {
             
                 this.setState({
                     minumans: [
-                minumanYangTidakDiPilih,
-                {
-                    id: this.state.minumans.length+1,
-                    nama: this.state.nama,
-                    deskripsi: this.state.deskripsi,
-                    harga: this.state.harga
-                },
-            ],
+                    ...minumanYangTidakDiPilih,
+                    {
+                        id: this.state.minumans.length+1,
+                        nama: this.state.nama,
+                        deskripsi: this.state.deskripsi,
+                        harga: this.state.harga
+                    },
+                ],
+            });
+        }
+        
+        this.setState({
+            nama : "",
+            deskripsi : "",
+            harga : 0,
+            id : ""
         });
-        }
-        
-        
-                this.setState({
-                    nama : "",
-                    deskripsi : "",
-                    harga : 0,
-                    id : ""
-                })
-            }
+    };
             
-            editData = (id) => {
-                const minumanYangDiPilih = this.state.minumans
-                .filter((minuman) => minuman.id === id)
-                .map((filterMinuman) => {
-                    return filterMinuman
-                })
+    editData = (id) => {
+        const minumanYangDiPilih = this.state.minumans
+            .filter((minuman) => minuman.id === id)
+            .map((filterMinuman) => {
+                return filterMinuman;
+            });
                 
-                this.setState({
-                    nama : minumanYangDiPilih[0].nama,
-                    deskripsi : minumanYangDiPilih[0].deskripsi,
-                    harga : minumanYangDiPilih[0].harga,
-                    id : minumanYangDiPilih[0].id,
-                })
-        }
+        this.setState({
+            nama : minumanYangDiPilih[0].nama,
+            deskripsi : minumanYangDiPilih[0].deskripsi,
+            harga : minumanYangDiPilih[0].harga,
+            id : minumanYangDiPilih[0].id,
+        });
+    };      
     
+    hapusData = (id) => {
+        const minumanBaru = this.state.minumans
+        .filter((minuman) => minuman.id !== id)
+        .map((filterMinuman) => {
+            return filterMinuman;
+        });
+        
+        this.setState({ 
+            minumans : minumanBaru
+        })
+    }
     render() {
         return (
             <div>
                 <NavbarComponent />
                 <div className="container mt-4">
-                    <Tabel minumans = {this.state.minumans} editable = {this.editData}/>
-                    <Formulir {...this.state} handleChange={ this.handleChange} handleSubmit={this.handleSubmit}/>
+                    <Tabel minumans = {this.state.minumans} 
+                    editData = {this.editData} 
+                    hapusData = {this.hapusData}
+                    />
+                    <Formulir {...this.state} 
+                    handleChange={ this.handleChange} 
+                    handleSubmit={this.handleSubmit}
+                    />
                 </div>
             </div>
         )
-    }
-}
+    };
+};
